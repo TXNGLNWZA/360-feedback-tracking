@@ -208,6 +208,79 @@ input[type="radio"]:checked + .score-circle::after {
   display: none;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.btn-back-header {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 12px;
+  color: #ffffff;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease-in-out;
+}
+
+.btn-back-header:hover,
+.btn-back-header:focus {
+  color: #82beff;
+  outline: none;
+}
+
+.confirm-evaluate-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.confirm-evaluate-modal {
+  background: white;
+  color: #000000;
+  padding: 20px;
+  border-radius: 6px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.confirm-evaluate-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-yes, .btn-no {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.btn-yes {
+  background-color: #ff5852;
+  color: white;
+}
+
+.btn-no {
+  background-color: #0fc7ff;
+  color: white;
+}
+
+
+
 /* เริ่ม Responsive Design */
 
 /* สำหรับหน้าจอขนาด Tablet ลงไป (<= 768px) */
@@ -332,6 +405,18 @@ input[type="radio"]:checked + .score-circle::after {
   .evaluatee-mobile .role {
     color: #ffffff;
   }
+
+  .header-left {
+  font-size: 1rem;
+}
+
+
+.text-area:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+
 }
 
 

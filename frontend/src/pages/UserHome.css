@@ -43,6 +43,7 @@
   margin-left: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  min-width: 100px;
 }
 
 .evaluate-table {
@@ -52,7 +53,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  table-layout: fixed;  
+  table-layout: auto;  
   min-height: 400px;
 }
 
@@ -83,7 +84,7 @@
 }
 
 .action-button {
-   width: 90px;       /* กำหนดความกว้างตายตัว */
+   width: 120px;       /* กำหนดความกว้างตายตัว */
   padding: 6px 0;
   margin: 0 4px;
   border-radius: 5px;
@@ -96,6 +97,17 @@
   justify-content: center; /* จัดข้อความอยู่ตรงกลาง */
   min-width: 65px;
 }
+
+.self-highlight {
+  background-color: #ffeb3b; /* เหลืองเด่น */
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
 
 .btn-feedback {
   background-color: #0099ff;
@@ -181,12 +193,12 @@
 }
 
 .btn-yes {
-  background-color: #ff5852;
+  background-color: #0fc7ff;
   color: white;
 }
 
 .btn-no {
-  background-color: #0fc7ff;
+  background-color: #ff5852;
   color: white;
 }
 
@@ -205,6 +217,22 @@
 .evaluate-table td:nth-child(3) { width: 20%; }  
 .evaluate-table th:nth-child(4),
 .evaluate-table td:nth-child(4) { width: 25%; }  
+
+.text-green-600 { color: #16a34a; }
+.text-orange-500 { color: #ff9500; }
+.text-red-500 { color: #ef4444; }
+
+.status-text {
+  font-weight: bold;
+}
+
+.membership-selector {
+  margin-top: 20px;
+  margin-bottom: 25px; /* หรือ 20px ก็ได้ */
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
 
 /* Media Queries */
 
@@ -312,12 +340,15 @@
   }
 
   .evaluate-table {
+    width: 100%;
     table-layout: auto;
     min-width: unset;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     
   }
   .evaluate-table th, .evaluate-table td {
-    font-size: 9px;
+    font-size: 12px;
     padding: 6px 8px;
   }
 
