@@ -51,7 +51,7 @@ useEffect(() => {
       setAllUsers(users);
 
       const uniqueTeams = [...new Set(users.map((item) => item.department))]
-        .filter(team => team && team.trim() !== "");
+        .filter(team => team && team.trim().toLowerCase() !== "all");
 
       setTeams(uniqueTeams);
 
@@ -222,14 +222,15 @@ useEffect(() => {
         value={selectedExportTeam}
         onChange={(e) => setSelectedExportTeam(e.target.value)}
       >
-                <option value="all">All</option>
-        {teams
-          .filter(team => team.toLowerCase() !== "all")
-          .map((team, index) => (
-            <option key={index} value={team}>
-              {team}
-            </option>
-        ))}   
+        <option value="all">All</option>
+          {teams
+            .filter(team => team.toLowerCase() !== "all")
+            .map((team, index) => (
+              <option key={index} value={team}>
+                {team}
+              </option>
+          ))}
+
         </select>
         <div className="popup-buttons">
           <button onClick={handleExport}>Export</button>

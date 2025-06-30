@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import "./EvaluationForm.css";
 import TruePerformanceImg from '../assets/True_Performance.png';
@@ -49,6 +49,7 @@ export default function EvaluationForm() {
   const [goBackConfirmed, setGoBackConfirmed] = useState(false);
   const [justSubmitted, setJustSubmitted] = useState(false);
   const [hasStartedTyping, setHasStartedTyping] = useState(false);
+  const location = useLocation();
 
   const scrollToQuestion = (sectionKey, questionId) => {
     const ref = questionRefs.current[`${sectionKey}-${questionId}`];
@@ -56,6 +57,19 @@ export default function EvaluationForm() {
       ref.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
+
+  useEffect(() => {
+    if (location.state) {
+      const { evaluatorId, evaluateeId, team, role } = location.state;
+      setEvaluatorId(evaluatorId);
+      setTeamName(team);
+      setUserRole(role);
+      setEvaluateeId(evaluateeId);
+    } else {
+      console.warn("⚠️ location.state ไม่มีค่า → ตรวจสอบการ navigate");
+    }
+  }, [location.state]);
+  const [evaluateeId, setEvaluateeId] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5000/api/questions?form_id=1")
@@ -66,24 +80,30 @@ export default function EvaluationForm() {
 
   // โหลดจาก backend evaluation_relations อย่างเดียว
     useEffect(() => {
+      if (!id || !evaluatorId || !teamName || !userRole) return;
+
       fetch("http://localhost:5000/api/evaluation_relations")
         .then(res => res.json())
         .then(data => {
-          const existing = data.find(e => e.evaluatee_id === id);
+          const existing = data.find(e =>
+            e.evaluatee_id === id &&
+            e.evaluator_id === evaluatorId &&
+            e.team_name === teamName &&
+            e.relationship_role === userRole
+          );
+
           if (existing) {
             setEvaluateeInfo({
               fullName: existing.evaluatee_name || id,
               Role: existing.relationship_role
             });
-            setEvaluatorId(existing.evaluator_id);
-            setTeamName(existing.team_name);
-            setUserRole(existing.relationship_role);
             setCurrentStatus(existing.status);
             setHasLoadedStatus(true);
-            // load partial formData ต่อ...
+            // ดึงฟีดแบคเก่าต่อ...
           }
         });
-    }, [id]);
+    }, [id, evaluatorId, teamName, userRole]);
+
 
 
   // Auto save ทุกครั้งที่ formData เปลี่ยนแปลง
@@ -149,7 +169,12 @@ useEffect(() => {
     fetch("http://localhost:5000/api/evaluation_relations")
       .then(res => res.json())
       .then(data => {
-        const existing = data.find(e => e.evaluatee_id === id);
+        const existing = data.find(e =>
+          e.evaluatee_id === id &&
+          e.evaluator_id === evaluatorId &&
+          e.team_name === teamName &&
+          e.relationship_role === userRole
+        );
         if (existing) {
           setEvaluateeInfo({ fullName: existing.evaluatee_name, Role: existing.relationship_role });
           setEvaluatorId(existing.evaluator_id);
@@ -172,7 +197,7 @@ useEffect(() => {
           }
 
           // ดึงคำตอบจริงจากตาราง answers
-          fetch(`http://localhost:5000/api/answers?evaluator_id=${existing.evaluator_id}&evaluatee_id=${id}`)
+          fetch(`http://localhost:5000/api/answers?evaluator_id=${evaluatorId}&evaluatee_id=${evaluateeId}&team_name=${encodeURIComponent(teamName)}&relationship_role=${encodeURIComponent(userRole)}`)
             .then(res => res.json())
             .then(answers => {
               const mergedForm = { ...partialForm };

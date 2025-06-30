@@ -1,15 +1,15 @@
-// routes/answers.js
 const express = require('express');
 const router = express.Router();
 const pool = require('../models/db');
 
 router.get('/', async (req, res) => {
-  const { evaluator_id, evaluatee_id } = req.query;
+  const { evaluator_id, evaluatee_id, team_name, relationship_role } = req.query;
 
   try {
     const relRes = await pool.query(
-      `SELECT id FROM evaluation_relations WHERE evaluator_id = $1 AND evaluatee_id = $2`,
-      [evaluator_id, evaluatee_id]
+      `SELECT id FROM evaluation_relations 
+       WHERE evaluator_id = $1 AND evaluatee_id = $2 AND team_name = $3 AND relationship_role = $4`,
+      [evaluator_id, evaluatee_id, team_name, relationship_role]
     );
 
     if (relRes.rows.length === 0) {
@@ -31,4 +31,3 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
-

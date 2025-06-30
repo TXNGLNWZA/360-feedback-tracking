@@ -94,7 +94,10 @@ export default function UserHome() {
 
         const selfId = userInfo.id;
         const selfEvalData = evals.find(e =>
-          e.evaluatee_id === userInfo.id && e.evaluator_id === userInfo.id
+          e.evaluatee_id === userInfo.id &&
+          e.evaluator_id === userInfo.id &&
+          e.team_name === selectedMembership.team &&
+          e.relationship_role === selectedMembership.role
         );
 
         const selfEval = {
@@ -112,10 +115,10 @@ export default function UserHome() {
         const filtered = evaluatees.filter(u => {
           if (u.id === userInfo.id) return false;
           const r = selectedMembership.role;
-          if (r === "Sponsor") return ["Member", "Co-Sponsor", "Main Sponsor"].includes(u.role);
-          if (r === "Co-Sponsor") return ["Member", "Sponsor", "Main Sponsor","Co-Sponsor"].includes(u.role);
-          if (r === "Member") return ["Member", "Sponsor", "Main Sponsor","Co-Sponsor"].includes(u.role);
-          if (r === "Main Sponsor") return ["Co-Sponsor", "Member"].includes(u.role);
+          if (r === "Sponsor") return ["Member", "Co-Sponsor", "Main Sponsor", "Sponsor"].includes(u.role);
+          if (r === "Co-Sponsor") return ["Member", "Sponsor", "Main Sponsor", "Co-Sponsor"].includes(u.role);
+          if (r === "Member") return ["Member", "Sponsor", "Main Sponsor", "Co-Sponsor"].includes(u.role);
+          if (r === "Main sponsor") return ["Co-Sponsor", "Member"].includes(u.role);
           return false;
         });
 
@@ -137,8 +140,8 @@ export default function UserHome() {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        evaluator_id: userInfo.id,
         evaluatee_id: evaluateId,
+        evaluator_id: userInfo.id,
         relationship_role: selectedMembership.role,
         team_name: selectedMembership.team,
         status: "In Progress",
@@ -146,7 +149,15 @@ export default function UserHome() {
         answers: answers
       })
     })
-      .then(() => navigate(`/evaluate/${evaluateId}`))
+      .then(() => navigate(`/evaluate/${evaluateId}`, {
+        state: {
+          evaluatorId: userInfo.id,
+          team: selectedMembership.team,
+          role: selectedMembership.role,
+          evaluateeId: evaluateId
+        }
+      }))
+
       .catch(() => {
         alert("Error setting status to inprogress");
         navigate(`/evaluate/${evaluateId}`); // ยอมให้เข้าแม้ fail
@@ -245,11 +256,34 @@ export default function UserHome() {
               {getStatusDisplay(e.status) === "Completed" && e.feedbackSaved === "n" ? (
                 <span style={{ color: "gray" }}>Cannot Evaluate</span>
               ) : getStatusDisplay(e.status) === "Completed" ? (
-                <button className="action-button btn-edit" onClick={() => navigate(`/evaluate/${e.id}`, { state: { isEdit: true } })}>
+                <button
+                  className="action-button btn-edit"
+                  onClick={() => navigate(`/evaluate/${e.id}`, {
+                    state: {
+                      evaluatorId: userInfo.id,
+                      team: selectedMembership.team,
+                      role: selectedMembership.role,
+                      evaluateeId: e.id,
+                      isEdit: true // ถ้ามี
+                    }
+                  })}
+                >
+
                   <FaEdit /> Edit
                 </button>
               ) : getStatusDisplay(e.status) === "In Progress" ? (
-                <button className="action-button btn-feedback" onClick={() => navigate(`/evaluate/${e.id}`)}>
+                <button
+                  className="action-button btn-feedback"
+                  onClick={() => navigate(`/evaluate/${e.id}`, {
+                    state: {
+                      evaluatorId: userInfo.id,
+                      team: selectedMembership.team,
+                      role: selectedMembership.role,
+                      evaluateeId: e.id,
+                      isEdit: true // ถ้ามี
+                    }
+                  })}
+                >
                   <FaEdit /> Continue
                 </button>
               ) : (
@@ -317,4 +351,3 @@ export default function UserHome() {
     </div>
   );
 }
-

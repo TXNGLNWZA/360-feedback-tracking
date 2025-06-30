@@ -27,9 +27,11 @@ router.put('/', async (req, res) => {
 
   try {
     const existing = await pool.query(
-      'SELECT id FROM evaluation_relations WHERE evaluator_id = $1 AND evaluatee_id = $2',
-      [evaluator_id, evaluatee_id]
+      `SELECT id FROM evaluation_relations 
+      WHERE evaluator_id = $1 AND evaluatee_id = $2 AND team_name = $3 AND relationship_role = $4`,
+      [evaluator_id, evaluatee_id, team_name, relationship_role]
     );
+
 
     let relationId;
     if (existing.rows.length > 0) {
