@@ -41,7 +41,7 @@ export default function UserHome() {
 
   useEffect(() => {
     if (!userInfo) return;
-    fetch(`http://localhost:5000/api/users/${userInfo.id}`)
+    fetch(`https://three60-feedback-tracking.onrender.com/api/users/${userInfo.id}`)
       .then(res => res.json())
       .then(data => {
         const myMemberships = Array.isArray(data) ? data : [data];
@@ -70,10 +70,10 @@ export default function UserHome() {
   useEffect(() => {
     if (!userInfo || !selectedMembership) return;
 
-    fetch(`http://localhost:5000/api/users?department=${encodeURIComponent(selectedMembership.team)}`)
+    fetch(`https://three60-feedback-tracking.onrender.com/api/users?department=${encodeURIComponent(selectedMembership.team)}`)
       .then(res => res.json())
       .then(async teamMembers => {
-        const evalRes = await fetch("http://localhost:5000/api/evaluation_relations");
+        const evalRes = await fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations");
         const evals = await evalRes.json();
 
         const evaluatees = teamMembers.map(user => {
@@ -136,7 +136,7 @@ export default function UserHome() {
   const confirmEvaluate = () => {
     setShowConfirmEvaluate(false);
 
-    fetch("http://localhost:5000/api/evaluation_relations", {
+    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -166,7 +166,7 @@ export default function UserHome() {
 
 
   const confirmSkip = () => {
-    fetch("http://localhost:5000/api/evaluation_relations", {
+    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

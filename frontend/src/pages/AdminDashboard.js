@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   const [allEvaluations, setAllEvaluations] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/users")
+    fetch("https://three60-feedback-tracking.onrender.com/api/users")
       .then((res) => res.json())
       .then((data) => {
         setAllUsers(data);
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchEvaluations = () => {
-      fetch("http://localhost:5000/api/evaluation_relations")
+      fetch("https://three60-feedback-tracking.onrender.com/evaluation_relations")
         .then((res) => res.json())
         .then((data) => setAllEvaluations(data))
         .catch((err) => console.error("Error fetching evaluations:", err));

@@ -14,7 +14,7 @@ const AdminHome = () => {
   const [selectedExportTeam, setSelectedExportTeam] = useState("all");
 
   const handleExport = async () => {
-  let url = "http://localhost:5000/api/export360";
+  let url = "https://three60-feedback-tracking.onrender.com/api/export360";
   if (selectedExportTeam && selectedExportTeam !== "all") {
     url += `?team=${encodeURIComponent(selectedExportTeam)}`;
   }
@@ -44,7 +44,7 @@ const AdminHome = () => {
 };
 
 useEffect(() => {
-  fetch("http://localhost:5000/api/users")
+  fetch("https://three60-feedback-tracking.onrender.com/api/users")
     .then((res) => res.json())
     .then((data) => {
       const users = Array.isArray(data) ? data : data.users || [];
@@ -67,7 +67,7 @@ useEffect(() => {
       setAllUsers([]); // fallback to empty array
     });
 
-  fetch("http://localhost:5000/api/evaluation_relations")
+  fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations")
     .then((res) => res.json())
     .then((data) => {
       const evals = Array.isArray(data) ? data : data.evaluations || [];

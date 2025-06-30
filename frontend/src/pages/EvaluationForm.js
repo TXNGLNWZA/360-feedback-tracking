@@ -72,7 +72,7 @@ export default function EvaluationForm() {
   const [evaluateeId, setEvaluateeId] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/questions?form_id=1")
+    fetch("https://three60-feedback-tracking.onrender.com/api/questions?form_id=1")
       .then(res => res.json())
       .then(data => setQuestions(data))
       .catch(err => console.error("Load questions failed:", err));
@@ -82,7 +82,7 @@ export default function EvaluationForm() {
     useEffect(() => {
       if (!id || !evaluatorId || !teamName || !userRole) return;
 
-      fetch("http://localhost:5000/api/evaluation_relations")
+      fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations")
         .then(res => res.json())
         .then(data => {
           const existing = data.find(e =>
@@ -131,7 +131,7 @@ useEffect(() => {
     console.log("hasStartedTyping:", hasStartedTyping);
     console.log("isFormChanged:", JSON.stringify(formData) !== JSON.stringify(initialFormData));
 
-    fetch("http://localhost:5000/api/evaluation_relations", {
+    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -166,7 +166,7 @@ useEffect(() => {
   useEffect(() => {
     if (questions.length === 0) return;
 
-    fetch("http://localhost:5000/api/evaluation_relations")
+    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations")
       .then(res => res.json())
       .then(data => {
         const existing = data.find(e =>
@@ -197,7 +197,7 @@ useEffect(() => {
           }
 
           // ดึงคำตอบจริงจากตาราง answers
-          fetch(`http://localhost:5000/api/answers?evaluator_id=${evaluatorId}&evaluatee_id=${evaluateeId}&team_name=${encodeURIComponent(teamName)}&relationship_role=${encodeURIComponent(userRole)}`)
+          fetch(`https://three60-feedback-tracking.onrender.com/api/answers?evaluator_id=${evaluatorId}&evaluatee_id=${evaluateeId}&team_name=${encodeURIComponent(teamName)}&relationship_role=${encodeURIComponent(userRole)}`)
             .then(res => res.json())
             .then(answers => {
               const mergedForm = { ...partialForm };
@@ -405,7 +405,7 @@ useEffect(() => {
     const statusToUse = overrideStatus || currentStatus;
     console.log("📦 saveEvaluation called with status:", statusToUse);
 
-      return await fetch("http://localhost:5000/api/evaluation_relations", {
+      return await fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
