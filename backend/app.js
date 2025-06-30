@@ -8,7 +8,11 @@ const authRoutes = require('./routes/auth');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["https://360-feedback-tracking-kjy8.vercel.app"],
+  credentials: true
+}));
+
 app.use(bodyParser.json());
 
 const userRoutes = require('./routes/users');
