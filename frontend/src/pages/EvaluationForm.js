@@ -27,7 +27,7 @@ const questionDescriptions = {
   innovation: "Never settle for what is and seeks ways to improve on all aspects. Initiate new ideas, create prototype, fail quickly, and learn to improve. (ไม่หยุดอยู่แค่สิ่งที่มีอยู่และหาวิธีปรับปรุงทุกด้าน เริ่มต้นไอเดียใหม่ ๆ สร้างต้นแบบ ล้มเหลวอย่างรวดเร็ว และเรียนรู้เพื่อพัฒนา​)",
   empowerment: "Find ways for self & others to take actions effectively while considering calculated risks. Promote sense of trust & accountability within and across teams. (นหาวิธีที่ตัวเองและผู้อื่นสามารถดำเนินการได้อย่างมีประสิทธิภาพ โดยคำนึงถึงความเสี่ยงที่ประเมินได้ ส่งเสริมความไว้วางใจและความรับผิดชอบทั้งภายในและข้ามทีม​)",
 
-  contribution_org: "Work that is completed and contributes to the success of the organization. (งานที่ทำสำเร็จและมีผลต่อความสำเร็จขององค์กร)",
+  contribution_org: "งานที่ทำสำเร็จและมีผลต่อความสำเร็จขององค์กร",
   innovation_org: "Work that is creative or improved for the benefit of the organization. (งานที่สร้างสรรค์หรือปรับปรุงให้ดีขึ้นเพื่อองค์กร)",
   contribution_team_org: "Work that is completed and contributes to the success of the team. (งานที่ทำสำเร็จและมีผลต่อความสำเร็จของทีม)",
   contribution_org2: "ข้อมูลสนับสนุนด้านการสร้างคุณค่าให้กับองค์กร",
@@ -76,7 +76,7 @@ export default function EvaluationForm() {
   const [evaluateeId, setEvaluateeId] = useState("");
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/questions?form_id=1`)
+    fetch("https://three60-feedback-tracking.onrender.com/api/questions?form_id=1")
       .then(res => res.json())
       .then(data => setQuestions(data))
       .catch(err => console.error("Load questions failed:", err));
@@ -86,7 +86,7 @@ export default function EvaluationForm() {
     useEffect(() => {
       if (!id || !evaluatorId || !teamName || !userRole) return;
 
-      fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`)
+      fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations")
         .then(res => res.json())
         .then(data => {
           const existing = data.find(e =>
@@ -135,7 +135,7 @@ useEffect(() => {
     console.log("hasStartedTyping:", hasStartedTyping);
     console.log("isFormChanged:", JSON.stringify(formData) !== JSON.stringify(initialFormData));
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`, {
+    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -170,7 +170,7 @@ useEffect(() => {
   useEffect(() => {
     if (questions.length === 0) return;
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`)
+    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations")
       .then(res => res.json())
       .then(data => {
         const existing = data.find(e =>
@@ -201,7 +201,7 @@ useEffect(() => {
           }
 
           // ดึงคำตอบจริงจากตาราง answers
-          fetch(`${process.env.REACT_APP_API_URL}/api/answers?evaluator_id=${evaluatorId}&evaluatee_id=${evaluateeId}&team_name=${encodeURIComponent(teamName)}&relationship_role=${encodeURIComponent(userRole)}`)
+          fetch(`https://three60-feedback-tracking.onrender.com/api/answers?evaluator_id=${evaluatorId}&evaluatee_id=${evaluateeId}&team_name=${encodeURIComponent(teamName)}&relationship_role=${encodeURIComponent(userRole)}`)
             .then(res => res.json())
             .then(answers => {
               const mergedForm = { ...partialForm };
@@ -357,7 +357,7 @@ useEffect(() => {
               <div className="score-radio-group" style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
                 {scoreOptions.map((opt) => (
                   <div key={opt.value} style={{ textAlign: "center", flex: 1 }}>
-                    <div className="score-label">{opt.label}</div>
+                    <div style={{ marginBottom: 4, fontSize: "0.85em" }}>{opt.label}</div>
                     <label className="score-option">
                       <input
                         type="radio"
@@ -414,7 +414,7 @@ useEffect(() => {
     const statusToUse = overrideStatus || currentStatus;
     console.log("📦 saveEvaluation called with status:", statusToUse);
 
-      return await fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`, {
+      return await fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -466,6 +466,7 @@ useEffect(() => {
         {renderQuestions(questions, "operational")}
 
         <h4>Section 3: True Performance</h4>
+        <img src={TruePerformanceImg} alt="" aria-hidden="true" style={{ maxWidth: "100%", marginBottom: "20px" }} />
         {renderQuestions(questions, "performance")}
 
         <h4>Section 4: Overall Performance</h4>
