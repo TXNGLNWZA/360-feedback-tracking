@@ -5,30 +5,34 @@ import "./EvaluationForm.css";
 import TruePerformanceImg from '../assets/True_Performance.png';
 
 const scoreOptions = [
-  { value: 1, label: "Caution" },
-  { value: 2, label: "Partially Meet" },
-  { value: 3, label: "Good Achievement" },
-  { value: 4, label: "Beyond Expectation" },
-  { value: 5, label: "True Excellence" },
+  { value: 1, label: "Not Demonstrate" },
+  { value: 2, label: "Randomly Demonstrate" },
+  { value: 3, label: "Often Demonstrate" },
+  { value: 4, label: "Consistently Demonstrate" },
+  { value: 5, label: "Role Model/Influence Other" },
 ];
 
 const questionDescriptions = {
-  compassion: "คิดถึงผู้อื่นและส่วนรวมเสมือนเป็นตนเอง รู้สึกเห็นใจ และพร้อมทำความเข้าใจสุขทุกข์ของผู้อื่น เพื่อให้ทุกชีวิตและโลกของพวกเราดีขึ้นในทุกวัน",
-  credibility: "ความเชื่อใจที่สร้างจากความมุ่งมั่น ทุ่มเท และไม่ย่อท้อที่จะสร้างผลลัพธ์ให้ประสบความสำเร็จอย่างเต็มประสิทธิภาพเสมอ",
-  co_creation: "ร่วมแรงร่วมใจภายในเป็นหนึ่ง ประสานพลังและความร่วมมือกับพันธมิตรเพื่อร่วมสร้างสรรค์และเรียนรู้ในการพัฒนาสิ่งใหม่",
-  courage: "กล้าคิด กล้าลงมือทำสิ่งใหม่ ๆ แม้ต้องเผชิญกับความลำบากและท้าทาย พร้อมเปลี่ยนมุมมองเพื่อหาทางเลือกใหม่ ๆ ให้ตรงใจลูกค้าเสมอ",
+  compassion: "Empathy beyond caring. Always put our people and customers first, and help better their lives, communities, and the world. (คิดถึงผู้อื่นและส่วนรวมเสมือนเป็นตนเอง รู้สึกเห็นใจ และพร้อมทำความเข้าใจสุขทุกข์ของผู้อื่น เพื่อให้ทุกชีวิตและโลกของพวกเราดีขึ้นในทุกวัน)",
+  credibility: "Always deliver on our promises with high performance, dedication, passion, and competency. (ความเชื่อใจที่สร้างจากความมุ่งมั่น ทุ่มเท และไม่ย่อท้อที่จะสร้างผลลัพธ์ให้ประสบความสำเร็จอย่างเต็มประสิทธิภาพเสมอ)",
+  co_creation: "Embrace togetherness and collaborate with others, including external partners, to develop new and better solutions. (ร่วมแรงร่วมใจภายในเป็นหนึ่ง ประสานพลังและความร่วมมือกับพันธมิตรเพื่อร่วมสร้างสรรค์และเรียนรู้ในการพัฒนาสิ่งใหม่)",
+  courage: "Dare to explore, despite challenges, with innovative thinking and in the rightful ways for our customers. (กล้าคิด กล้าลงมือทำสิ่งใหม่ ๆ แม้ต้องเผชิญกับความลำบากและท้าทาย พร้อมเปลี่ยนมุมมองเพื่อหาทางเลือกใหม่ ๆ ให้ตรงใจลูกค้าเสมอ)",
 
-  productivity: "Strive to achieve excellent performance, productivity & economic values. Push beyond limits to generate revenue, reduce cost, and exceed customer's expectations.",
-  high_quality: "Continuously assess, develop, & deliver higher quality of works to ensure excellent products, solutions, & services.",
-  dynamic_agile: "Understand current business situation and adapt self accordingly. Analyze business risk, recover quickly from crisis and provide solutions.",
-  open_transparent: "Eager to learn, seek feedback & opportunities for further development. Break silos & work collaborative to achieve economic values.",
-  customer_centric: "Empathize with markets & customers' needs. Contribute to products & solutions solving their pain-points & promote loyalty.",
-  data_driven: "Deliver results through accurate & meaningful data. Use data to track progress & find ways to enhance outcomes. Anticipate problems & offer solutions based on data.",
-  innovation: "Never settle for what is and seeks ways to improve on all aspects. Initiate new ideas, create prototype, fail quickly, and learn to improve.",
-  empowerment: "Find ways for self & others to take actions effectively while considering calculated risks. Promote sense of trust & accountability within and across teams.",
+  productivity: "Strive to achieve excellent performance, productivity & economic values. Push beyond limits to generate revenue, reduce cost, and exceed customer's expectations. (พยายามบรรลุผลการปฏิบัติงานที่ยอดเยี่ยม ประสิทธิภาพการผลิต และคุณค่าทางเศรษฐกิจ ผลักดันขีดจำกัดเพื่อสร้างรายได้ ลดต้นทุน และเกินความคาดหวังของลูกค้า)",
+  high_quality: "Continuously assess, develop, & deliver higher quality of works to ensure excellent products, solutions, & services. (ประเมิน พัฒนา และส่งมอบงานที่มีคุณภาพสูงขึ้นอย่างต่อเนื่อง เพื่อให้มั่นใจว่าผลิตภัณฑ์ โซลูชัน และบริการยอดเยี่ยม​)",
+  dynamic_agile: "Understand current business situation and adapt self accordingly. Analyze business risk, recover quickly from crisis and provide solutions. (คล่องตัวและปรับตัวได้ เข้าใจสถานการณ์ธุรกิจปัจจุบันและปรับตัวเองให้เหมาะสม วิเคราะห์ความเสี่ยงทางธุรกิจ ฟื้นตัวจากวิกฤตอย่างรวดเร็ว และนำเสนอแนวทางแก้ไข​)",
+  open_transparent: "Eager to learn, seek feedback & opportunities for further development. Break silos & work collaborative to achieve economic values. (เปิดกว้าง โปร่งใส และทำงานร่วมกัน:กระตือรือร้นในการเรียนรู้ แสวงหาผลตอบรับและโอกาสในการพัฒนาเพิ่มเติม ทำลายกรอบการทำงานที่แยกส่วน และทำงานร่วมกันเพื่อให้บรรลุคุณค่าทางเศรษฐกิจ​)",
+  customer_centric: "Empathize with markets & customers' needs. Contribute to products & solutions solving their pain-points & promote loyalty. (เข้าใจความต้องการของตลาดและลูกค้า มีส่วนช่วยในการพัฒนาผลิตภัณฑ์และโซลูชันที่แก้ปัญหาของพวกเขา และส่งเสริมความภักดี)",
+  data_driven: "Deliver results through accurate & meaningful data. Use data to track progress & find ways to enhance outcomes. Anticipate problems & offer solutions based on data. (ส่งมอบผลลัพธ์ผ่านข้อมูลที่แม่นยำและมีความหมาย ใช้ข้อมูลเพื่อติดตามความก้าวหน้าและค้นหาวิธีปรับปรุงผลลัพธ์ คาดการณ์ปัญหาและนำเสนอโซลูชันตามข้อมูล)",
+  innovation: "Never settle for what is and seeks ways to improve on all aspects. Initiate new ideas, create prototype, fail quickly, and learn to improve. (ไม่หยุดอยู่แค่สิ่งที่มีอยู่และหาวิธีปรับปรุงทุกด้าน เริ่มต้นไอเดียใหม่ ๆ สร้างต้นแบบ ล้มเหลวอย่างรวดเร็ว และเรียนรู้เพื่อพัฒนา​)",
+  empowerment: "Find ways for self & others to take actions effectively while considering calculated risks. Promote sense of trust & accountability within and across teams. (นหาวิธีที่ตัวเองและผู้อื่นสามารถดำเนินการได้อย่างมีประสิทธิภาพ โดยคำนึงถึงความเสี่ยงที่ประเมินได้ ส่งเสริมความไว้วางใจและความรับผิดชอบทั้งภายในและข้ามทีม​)",
 
-  contribution_org: "งานที่ทำสำเร็จและมีผลต่อความสำเร็จขององค์กร",
-
+  contribution_org: "Work that is completed and contributes to the success of the organization. (งานที่ทำสำเร็จและมีผลต่อความสำเร็จขององค์กร)",
+  innovation_org: "Work that is creative or improved for the benefit of the organization. (งานที่สร้างสรรค์หรือปรับปรุงให้ดีขึ้นเพื่อองค์กร)",
+  contribution_team_org: "Work that is completed and contributes to the success of the team. (งานที่ทำสำเร็จและมีผลต่อความสำเร็จของทีม)",
+  contribution_org2: "ข้อมูลสนับสนุนด้านการสร้างคุณค่าให้กับองค์กร",
+  innovation_org2: "ข้อมูลสนับสนุนด้านสร้างสรรค์สิ่งใหม่เพื่อองค์กร",
+  contribution_team_org2:"ข้อมูลสนับสนุนด้านการสร้างคุณค่าให้กับทีม"
 };
 
 export default function EvaluationForm() {
@@ -72,7 +76,7 @@ export default function EvaluationForm() {
   const [evaluateeId, setEvaluateeId] = useState("");
 
   useEffect(() => {
-    fetch("https://three60-feedback-tracking.onrender.com/api/questions?form_id=1")
+    fetch(`${process.env.REACT_APP_API_URL}/api/questions?form_id=1`)
       .then(res => res.json())
       .then(data => setQuestions(data))
       .catch(err => console.error("Load questions failed:", err));
@@ -82,7 +86,7 @@ export default function EvaluationForm() {
     useEffect(() => {
       if (!id || !evaluatorId || !teamName || !userRole) return;
 
-      fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations")
+      fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`)
         .then(res => res.json())
         .then(data => {
           const existing = data.find(e =>
@@ -131,7 +135,7 @@ useEffect(() => {
     console.log("hasStartedTyping:", hasStartedTyping);
     console.log("isFormChanged:", JSON.stringify(formData) !== JSON.stringify(initialFormData));
 
-    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
+    fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -166,7 +170,7 @@ useEffect(() => {
   useEffect(() => {
     if (questions.length === 0) return;
 
-    fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations")
+    fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`)
       .then(res => res.json())
       .then(data => {
         const existing = data.find(e =>
@@ -197,7 +201,7 @@ useEffect(() => {
           }
 
           // ดึงคำตอบจริงจากตาราง answers
-          fetch(`https://three60-feedback-tracking.onrender.com/api/answers?evaluator_id=${evaluatorId}&evaluatee_id=${evaluateeId}&team_name=${encodeURIComponent(teamName)}&relationship_role=${encodeURIComponent(userRole)}`)
+          fetch(`${process.env.REACT_APP_API_URL}/api/answers?evaluator_id=${evaluatorId}&evaluatee_id=${evaluateeId}&team_name=${encodeURIComponent(teamName)}&relationship_role=${encodeURIComponent(userRole)}`)
             .then(res => res.json())
             .then(answers => {
               const mergedForm = { ...partialForm };
@@ -314,6 +318,11 @@ useEffect(() => {
                 "Innovation": "innovation",
                 "Empowerment": "empowerment",
                 "Contribution to the Organization (การสร้างคุณค่าให้กับองค์กร)": "contribution_org",
+                "Innovation for the Organization (สร้างสรรค์สิ่งใหม่เพื่อองค์กร)": "innovation_org",
+                "Contribution to Team (การสร้างคุณค่าให้กับทีม)": "contribution_team_org",
+                "Supporting details for the Contribution to the Organization": "contribution_org2",
+                "Supporting details for the Innovation for the Organization": "innovation_org2",
+                "Supporting details for the Contribution to Team": "contribution_team_org2"
               };
               const descKey = mapKey[question.question_text];
               return descKey && questionDescriptions[descKey] ? (
@@ -348,7 +357,7 @@ useEffect(() => {
               <div className="score-radio-group" style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
                 {scoreOptions.map((opt) => (
                   <div key={opt.value} style={{ textAlign: "center", flex: 1 }}>
-                    <div style={{ marginBottom: 4, fontSize: "0.85em" }}>{opt.label}</div>
+                    <div className="score-label">{opt.label}</div>
                     <label className="score-option">
                       <input
                         type="radio"
@@ -405,7 +414,7 @@ useEffect(() => {
     const statusToUse = overrideStatus || currentStatus;
     console.log("📦 saveEvaluation called with status:", statusToUse);
 
-      return await fetch("https://three60-feedback-tracking.onrender.com/api/evaluation_relations", {
+      return await fetch(`${process.env.REACT_APP_API_URL}/api/evaluation_relations`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -457,7 +466,6 @@ useEffect(() => {
         {renderQuestions(questions, "operational")}
 
         <h4>Section 3: True Performance</h4>
-        <img src={TruePerformanceImg} alt="" aria-hidden="true" style={{ maxWidth: "100%", marginBottom: "20px" }} />
         {renderQuestions(questions, "performance")}
 
         <h4>Section 4: Overall Performance</h4>
