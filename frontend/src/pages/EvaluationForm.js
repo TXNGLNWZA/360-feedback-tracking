@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import "./EvaluationForm.css";
-import TruePerformanceImg from '../assets/True_Performance.png';
 
 const scoreOptions = [
   { value: 1, label: "Not Demonstrate" },
