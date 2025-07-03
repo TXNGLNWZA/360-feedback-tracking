@@ -71,6 +71,15 @@ h4 {
   margin-top: 2px;
 }
 
+.score-label {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.score-radio-group div:first-child {
+  min-height: 3.4em; /* หรือปรับเป็น 2.6em ถ้ายังไม่พอ */
+}
+
 /* Textarea แบบ Google Form ที่คุณอยากได้ (เส้นใต้แทนกล่อง) */
 .google-form-textarea {
   width: 100%;
@@ -406,15 +415,18 @@ input[type="radio"]:checked + .score-circle::after {
   font-size: 1rem;
 }
 
-
 .text-area:focus {
   border-color: #0066cc;
   box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
 }
 
+.score-label {
+    font-size: 0.6rem;
+  }
+
+
 .score-radio-group div:first-child {
-  min-height: 3em; /* หรือปรับเป็น 2.6em ถ้ายังไม่พอ */
+  min-height: 4.5em; /* หรือปรับเป็น 2.6em ถ้ายังไม่พอ */
 }
 
 }
-
