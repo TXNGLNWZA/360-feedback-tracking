@@ -356,7 +356,7 @@ useEffect(() => {
               <div className="score-radio-group" style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
                 {scoreOptions.map((opt) => (
                   <div key={opt.value} style={{ textAlign: "center", flex: 1 }}>
-                    <div style={{ marginBottom: 4, fontSize: "0.85em" }}>{opt.label}</div>
+                    <div className="score-label">{opt.label}</div>
                     <label className="score-option">
                       <input
                         type="radio"
