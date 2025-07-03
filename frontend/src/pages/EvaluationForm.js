@@ -465,7 +465,6 @@ useEffect(() => {
         {renderQuestions(questions, "operational")}
 
         <h4>Section 3: True Performance</h4>
-        <img src={TruePerformanceImg} alt="" aria-hidden="true" style={{ maxWidth: "100%", marginBottom: "20px" }} />
         {renderQuestions(questions, "performance")}
 
         <h4>Section 4: Overall Performance</h4>
